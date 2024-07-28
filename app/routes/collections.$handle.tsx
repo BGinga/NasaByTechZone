@@ -128,6 +128,7 @@ function ProductItem({
 }) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  console.log(variantUrl)
   return (
     <Link
       className="product-item"

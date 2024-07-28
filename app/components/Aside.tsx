@@ -1,4 +1,4 @@
-import {createContext, type ReactNode, useContext, useState} from 'react';
+import {createContext, type ReactNode, useContext, useEffect, useState} from 'react';
 
 type AsideType = 'search' | 'cart' | 'mobile' | 'closed';
 type AsideContextValue = {
@@ -27,12 +27,19 @@ export function Aside({
   heading: React.ReactNode;
 }) {
   const {type: activeType, close} = useAside();
+  const [currentWindow, setWindow] = useState<string>('/');
   const expanded = type === activeType;
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setWindow(window.location.pathname);
+      console.log(window.location.pathname)
+    }
+  }, [])
   return (
     <div
       aria-modal
-      className={`overlay ${expanded ? 'expanded' : ''}`}
+      className={`overlay ${expanded ? 'expanded' : ''} ${currentWindow === "/" ? 'home' : 'not-home'}`}
       role="dialog"
     >
       <button className="close-outside" onClick={close} />

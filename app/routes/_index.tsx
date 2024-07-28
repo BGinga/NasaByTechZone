@@ -1,14 +1,24 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
-import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
-import type {
-  FeaturedCollectionFragment,
-  RecommendedProductsQuery,
-} from 'storefrontapi.generated';
+import {Suspense, useEffect, useState} from 'react';
+import {
+  Pagination,
+  getPaginationVariables,
+  Image,
+  Money,
+  Analytics,
+} from '@shopify/hydrogen';
+import {Col, Container, Row } from 'react-bootstrap';
+import Astronaut from '../assets/images/astronauta.png';
+import IconoAccesorios from '../assets/images/icono_accesorios.png';
+import IconoBackpacks from '../assets/images/icono_backpacks.png';
+import IconoSillas from '../assets/images/icono_sillas.png';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/css';
+import { useVariantUrl } from '~/lib/variants';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'NasaByTechZone | Inicio'}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -26,13 +36,24 @@ export async function loader(args: LoaderFunctionArgs) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  */
 async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const [{collections}] = await Promise.all([
-    context.storefront.query(FEATURED_COLLECTION_QUERY),
-    // Add other queries here, so that they are loaded in parallel
+  const [backpacks] = await Promise.all([
+    context.storefront.query(COLLECCTION_NASA, {
+      variables: { handle: 'backpacks-nasa' }
+    })
+  ]);
+  const [accesorios] = await Promise.all([
+    context.storefront.query(COLLECCTION_NASA, {
+      variables: { handle: 'accesorios-nasa' }
+    })
+  ]);
+  const [sillas] = await Promise.all([
+    context.storefront.query(COLLECCTION_NASA, {
+      variables: { handle: 'sillas-nasa' }
+    })
   ]);
 
   return {
-    featuredCollection: collections.nodes[0],
+      backpacks, accesorios, sillas
   };
 }
 
@@ -42,141 +63,183 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
  * Make sure to not throw any errors here, as it will cause the page to 500.
  */
 function loadDeferredData({context}: LoaderFunctionArgs) {
-  const recommendedProducts = context.storefront
+  {
+    /*const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
-    });
+    });*/
+  }
 
   return {
-    recommendedProducts,
+    /*recommendedProducts,*/
   };
 }
 
-export default function Homepage() {
+export const Homepage = () => {
   const data = useLoaderData<typeof loader>();
-  return (
-    <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
-    </div>
-  );
-}
+  const {backpacks} = data;
+  const {accesorios} = data;
+  const {sillas} = data;
+  const [isAbsolute, setIsAbsolute] = useState(false);
+  const [topOffset, setTopOffset] = useState(0);
 
-function FeaturedCollection({
-  collection,
-}: {
-  collection: FeaturedCollectionFragment;
-}) {
-  if (!collection) return null;
-  const image = collection?.image;
+  const handleScroll = () => {
+    const container = document.querySelector('.astronaut-container');
+    const containerRect = container!!.getBoundingClientRect();
+   
+    
+    if (containerRect.top <= 0) {
+      setIsAbsolute(true);
+      setTopOffset(scrollY);
+    } else {
+      setIsAbsolute(false);
+      setTopOffset(0);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
+    <Container fluid>
+      <Row className="astronaut-row">
+        <Col md="5" lg="5" sm="5" className='astronaut-container'>
+          <img style={{top: `${topOffset}px`}} className="absolute astronaut" src={Astronaut} width={600} />
+        </Col>
+        <Col md="7" lg="7" sm="7">
+          <span className="home-phrase nasalization">¡ASOMBRATE COMO NUNCA!</span>
+        </Col>
+      </Row>
+      <Row className=''>
+        <Col md={12} className="title-container">
+          <span>
+            <img src={IconoBackpacks} width={100} height={'auto'} />
+          </span>
+          <h1 className="title NASA">BACKPACKS</h1>
+        </Col>
+        <Col md={12} className='description nasalization'>
+            <span>{backpacks.collection?.description}</span>
+        </Col>
+        <Col md={12} className='product-container'>
+            <SlidesMakerCollection products={backpacks.collection?.products.edges} />
+        </Col>
+      </Row>
+      <Row>
+        <div className="title-container rev">
+          <span>
+            <img src={IconoAccesorios} width={100} height={'auto'} />
+          </span>
+          <h1 className="title NASA">Accesorios</h1>
         </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
+        <Row className='description nasalization'>
+            <span>{accesorios.collection?.description}</span>
+        </Row>
+        <Row className='product-container'>
+            <SlidesMakerCollection products={accesorios.collection?.products.edges} />
+        </Row>
+      </Row>
+      <Row>
+        <div className="title-container">
+          <span>
+            <img src={IconoSillas} width={100} height={'auto'} />
+          </span>
+          <h1 className="title NASA">Sillas</h1>
+        </div>
+        <Row className='description nasalization'>
+            <span>{sillas.collection?.description}</span>
+        </Row>
+        <Row className='product-container'>
+            <SlidesMakerCollection products={sillas.collection?.products.edges} />
+        </Row>
+      </Row>
+    </Container>
   );
-}
+};
 
-function RecommendedProducts({
-  products,
-}: {
-  products: Promise<RecommendedProductsQuery | null>;
-}) {
-  return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {(response) => (
-            <div className="recommended-products-grid">
-              {response
-                ? response.products.nodes.map((product) => (
-                    <Link
-                      key={product.id}
-                      className="recommended-product"
-                      to={`/products/${product.handle}`}
-                    >
-                      <Image
-                        data={product.images.nodes[0]}
-                        aspectRatio="1/1"
-                        sizes="(min-width: 45em) 20vw, 50vw"
-                      />
-                      <h4>{product.title}</h4>
-                      <small>
-                        <Money data={product.priceRange.minVariantPrice} />
-                      </small>
-                    </Link>
-                  ))
-                : null}
-            </div>
-          )}
-        </Await>
-      </Suspense>
-      <br />
-    </div>
-  );
-}
+const SlidesMakerCollection = ({products}: any) => {
 
-const FEATURED_COLLECTION_QUERY = `#graphql
-  fragment FeaturedCollection on Collection {
-    id
-    title
-    image {
-      id
-      url
-      altText
-      width
-      height
-    }
-    handle
-  }
-  query FeaturedCollection($country: CountryCode, $language: LanguageCode)
-    @inContext(country: $country, language: $language) {
-    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
-      nodes {
-        ...FeaturedCollection
+  return(
+      <Swiper
+        spaceBetween={0}
+        slidesPerView={4}
+        className='swiperHome'
+      >
+      {products.map( (product: any, index: number) => {
+        const variant = product.node.variants.nodes[0];
+        const variantUrl = useVariantUrl(product.node.handle, variant.selectedOptions);
+
+        return(
+          <SwiperSlide key={index + product.node.handle}>
+            <Link
+              className="carrousel-product"
+              key={product.id}
+              prefetch="intent"
+              to={variantUrl}
+            >
+              {product.node.featuredImage && (
+                <Image
+                  alt={product.node.featuredImage.altText || product.node.title}
+                  data={product.node.featuredImage}
+                  className='product-carousel-image '
+                  aspectRatio="1/1"
+                  width={300}
+                  height={300}
+                  sizes="(min-width: 56em) 400px, 100vw"
+                />
+              )}
+              <h4>{product.title}</h4>
+              
+            </Link>
+          </SwiperSlide>
+        )
+      
+      })}
+    </Swiper>
+  )
+}
+const COLLECCTION_NASA = `#graphql
+query getCollectionByHandle($handle: String = "") {
+  collection(handle: $handle) {
+    description
+    products(first: 20) {
+      edges {
+        node {
+          handle
+          images(first: 2) {
+            edges {
+              node {
+                url
+              }
+            }
+          }
+          title
+          vendor
+          featuredImage {
+            id
+            altText
+            url
+            width
+            height
+          }
+          variants(first: 1) {
+            nodes {
+              selectedOptions {
+                name
+                value
+              }
+            }
+          }
+        }
       }
     }
   }
+}
 ` as const;
 
-const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-  fragment RecommendedProduct on Product {
-    id
-    title
-    handle
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    images(first: 1) {
-      nodes {
-        id
-        url
-        altText
-        width
-        height
-      }
-    }
-  }
-  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
-    @inContext(country: $country, language: $language) {
-    products(first: 4, sortKey: UPDATED_AT, reverse: true) {
-      nodes {
-        ...RecommendedProduct
-      }
-    }
-  }
-` as const;
+export default Homepage;

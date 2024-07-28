@@ -3,9 +3,25 @@
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
-  --header-height: 64px;
+  --header-height: 70px;
   --color-dark: #000;
   --color-light: #fff;
+}
+
+@font-face {
+  font-family: 'Nasalization';
+  src: url('/app/assets/fonts/NASALIZATION-RG.OTF') format('truetype');
+}
+@font-face {
+  font-family: 'NASA';
+  src: url('/app/assets/fonts/NASA.TTF') format('truetype');
+}
+
+.nasalization{
+  font-family: 'Nasalization';
+}
+.NASA{
+  font-family: 'NASA';
 }
 
 img {
@@ -149,13 +165,20 @@ button.reset:hover:not(:has(> *)) {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: transparent;
+  color: white !important;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: var(--header-height);
-  padding: 0 1rem;
+  padding: 1em 3em;
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.header a{
+  color: white !important;
 }
 
 .header-menu-mobile-toggle {
@@ -188,7 +211,6 @@ button.reset:hover:not(:has(> *)) {
   align-items: center;
   display: flex;
   grid-gap: 1rem;
-  margin-left: auto;
 }
 
 /*
@@ -484,3 +506,111 @@ button.reset:hover:not(:has(> *)) {
 .account-logout {
   display: inline-block;
 }
+
+
+body:has(.not-home){
+  background-image: url('/app/assets/images/bg_product.png');
+  background-size: 100%;
+  min-height: 200vh;
+}
+
+body:has(.home){
+  background-image: url('/app/assets/images/bg_home.png');
+  background-size: 100%;
+  min-height: 200vh;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 15vh;
+  background-image: url('/app/assets/images/linea_cat_rev.png');
+  background-size: 647px 170px;
+  background-repeat: no-repeat;
+  background-position: 56vw;
+}
+
+.title-container.rev{
+  background-image: url('/app/assets/images/linea_cat.png');
+  background-position: -10%;
+}
+
+.home-phrase{
+  color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 3em;
+  height: 100%;
+  align-items: center;
+}
+
+
+.title {
+  font-size: 48px;
+  color: white;
+  font-weight: 400;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.description span{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3em;
+  padding: 1em 0em;
+}
+
+.swiper-slide:has(.carrousel-product){
+  border-radius: 15%;
+  margin: auto auto;
+}
+
+.carrousel-product{
+  display: flex;
+  justify-content: center;
+  z-index: 12;
+  position: relative;
+  padding-bottom: 1em;
+}
+
+.swiperHome .swiper-slide::after{
+  content: '';
+  z-index: 10;
+  border-radius: 18%;
+  width: 90%;
+  height: 95%;
+  border: 1px white;
+  border-style: groove;
+  position: absolute;
+  top: 0;
+  left: 4.5%;
+}
+
+
+.carrousel-product img{
+  border-radius: 18%;
+  padding: 2%;
+}
+
+.astronaut-container{
+  position: relative;
+  min-height: 400px;
+}
+
+.astronaut{
+  transition: all 0.3s ease;
+}
+
+.absolute {
+  position: absolute !important;
+  top: 0;
+}
+
+
+

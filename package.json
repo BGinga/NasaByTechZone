@@ -20,11 +20,15 @@
     "@shopify/cli-hydrogen": "^8.1.1",
     "@shopify/hydrogen": "^2024.7.1",
     "@shopify/remix-oxygen": "^2.0.5",
+    "@types/swiper": "^6.0.0",
+    "bootstrap": "^5.3.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "isbot": "^3.8.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.10.4",
+    "react-dom": "^18.2.0",
+    "swiper": "^11.1.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",

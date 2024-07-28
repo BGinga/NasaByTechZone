@@ -14,6 +14,8 @@ import {
   PredictiveSearchResults,
 } from '~/components/Search';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
   footer: Promise<FooterQuery | null>;

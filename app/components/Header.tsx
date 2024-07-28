@@ -1,8 +1,10 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
+import { Image } from 'react-bootstrap';
 import {type CartViewPayload, useAnalytics} from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import Logo from '../assets/images/NASA_Logo-b-min.webp';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -15,7 +17,6 @@ type Viewport = 'desktop' | 'mobile';
 
 export function Header({
   header,
-  isLoggedIn,
   cart,
   publicStoreDomain,
 }: HeaderProps) {
@@ -23,7 +24,7 @@ export function Header({
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+          <Image src={Logo} width={150} height={'auto'}/>
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -31,7 +32,7 @@ export function Header({
         primaryDomainUrl={header.shop.primaryDomain.url}
         publicStoreDomain={publicStoreDomain}
       />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      <HeaderCtas cart={cart} />
     </header>
   );
 }
@@ -98,19 +99,11 @@ export function HeaderMenu({
 }
 
 function HeaderCtas({
-  isLoggedIn,
   cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+}: Pick<HeaderProps, 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-          </Await>
-        </Suspense>
-      </NavLink>
       <SearchToggle />
       <CartToggle cart={cart} />
     </nav>

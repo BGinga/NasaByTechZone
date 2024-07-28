@@ -14,6 +14,7 @@ import {
 import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
+import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 
@@ -98,7 +99,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+        headerMenuHandle: 'nasa-menu', // Adjust to your header menu handle
       },
     }),
     // Add other queries here, so that they are loaded in parallel
@@ -122,7 +123,7 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     .query(FOOTER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        footerMenuHandle: 'footer', // Adjust to your footer menu handle
+        footerMenuHandle: 'nasa-footer', // Adjust to your footer menu handle
       },
     })
     .catch((error) => {
