@@ -1,5 +1,10 @@
 import {Suspense} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import rocket from '../assets/images/icono_backpacks.png';
+// Import Swiper styles
+
 import {
   Await,
   Link,
@@ -27,6 +32,10 @@ import {
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
 import {useAside} from '~/components/Aside';
+import { Col, Container, Row } from 'react-bootstrap';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -143,48 +152,85 @@ function redirectToFirstVariant({
 
 export default function Product() {
   const {product, variants} = useLoaderData<typeof loader>();
-  const {selectedVariant} = product;
+  const {selectedVariant, descriptionHtml, metafields} = product;
+  console.log(selectedVariant);
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <ProductMain
-        selectedVariant={selectedVariant}
-        product={product}
-        variants={variants}
-      />
-      <Analytics.ProductView
-        data={{
-          products: [
-            {
-              id: product.id,
-              title: product.title,
-              price: selectedVariant?.price.amount || '0',
-              vendor: product.vendor,
-              variantId: selectedVariant?.id || '',
-              variantTitle: selectedVariant?.title || '',
-              quantity: 1,
-            },
-          ],
-        }}
-      />
-    </div>
+    <Container>
+      <Row xs={1} md={2} className="main-product">
+        <ProductImages images={metafields[0]?.references?.nodes} />
+        <ProductMain
+          selectedVariant={selectedVariant}
+          product={product}
+          variants={variants}
+        />
+        <Analytics.ProductView
+          data={{
+            products: [
+              {
+                id: product.id,
+                title: product.title,
+                price: selectedVariant?.price.amount || '0',
+                vendor: product.vendor,
+                variantId: selectedVariant?.id || '',
+                variantTitle: selectedVariant?.title || '',
+                quantity: 1,
+              },
+            ],
+          }}
+        />
+      </Row>
+      <Row>
+        <Col>
+          
+          <br />
+          <div className='description_html' dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+          <br />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          
+          <br />
+          <div className='description_html' dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+          <br />
+        </Col>
+      </Row>
+    </Container>
+   
   );
 }
 
-function ProductImage({image}: {image: ProductVariantFragment['image']}) {
-  if (!image) {
+function ProductImages({images}: any) {
+  console.log(images)
+  if (!images) {
     return <div className="product-image" />;
   }
   return (
-    <div className="product-image">
-      <Image
-        alt={image.altText || 'Product Image'}
-        aspectRatio="1/1"
-        data={image}
-        key={image.id}
-        sizes="(min-width: 45em) 50vw, 100vw"
-      />
-    </div>
+    <Col className="product-image">
+      <div style={{ padding: '0 18%', justifyContent: 'center', display: 'flex'}}>
+       <Swiper
+          spaceBetween={0}
+          slidesPerView={1}
+          navigation={true} modules={[Navigation]}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {images.map((image: any, index: number)=> {
+            return <SwiperSlide key={index + "product-image" }>
+              <Image
+                alt={image.altText || 'Product Image'}
+                aspectRatio="2/3"
+                data={image.image}
+                key={image.id}
+                sizes="(min-width: 45em) 50vw, 100vw"
+              />
+            </SwiperSlide>
+          })}
+         
+          
+        </Swiper>
+      </div>
+    </Col>
   );
 }
 
@@ -197,43 +243,64 @@ function ProductMain({
   selectedVariant: ProductFragment['selectedVariant'];
   variants: Promise<ProductVariantsQuery | null>;
 }) {
-  const {title, descriptionHtml} = product;
+  const {title, metafields} = product;
+  const short_description: any = metafields[2];
+  const ficha_tecnica: any = metafields[1];
+  console.log(ficha_tecnica)
+  
   return (
-    <div className="product-main">
-      <h1>{title}</h1>
-      <ProductPrice selectedVariant={selectedVariant} />
-      <br />
-      <Suspense
-        fallback={
-          <ProductForm
-            product={product}
-            selectedVariant={selectedVariant}
-            variants={[]}
-          />
-        }
-      >
-        <Await
-          errorElement="There was a problem loading product variants"
-          resolve={variants}
-        >
-          {(data) => (
+    <Col className="product-main">
+      <Row md={1}>
+          <Col>
+              <h1 className='product-title'>{title}</h1>
+          </Col>
+          <Col>  
+              <span className='product-short-description'>{short_description?.value}</span>
+          </Col>
+      </Row>
+      <Row md={2} xs={1}>
+        <Col>
+            <div className='product_ficha_tecnica'>
+              <a href={ficha_tecnica.reference.url} title='Ficha Técnica'>
+                <img src={rocket} alt="rocket" width={25} height='auto' /> Ficha Técnica
+              </a>
+            </div>
+        </Col>
+        <Col>
+          <ProductPrice selectedVariant={selectedVariant} />
+        </Col>
+      </Row>
+      <Row md={1}>
+        <Col>
+          <Suspense
+          fallback={
             <ProductForm
               product={product}
               selectedVariant={selectedVariant}
-              variants={data?.product?.variants.nodes || []}
+              variants={[]}
             />
-          )}
-        </Await>
-      </Suspense>
+          }
+        >
+          <Await
+            errorElement="There was a problem loading product variants"
+            resolve={variants}
+          >
+            {(data) => (
+              <ProductForm
+                product={product}
+                selectedVariant={selectedVariant}
+                variants={data?.product?.variants.nodes || []}
+              />
+            )}
+          </Await>
+        </Suspense>
+        </Col>
+      </Row>
+      
       <br />
       <br />
-      <p>
-        <strong>Description</strong>
-      </p>
-      <br />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-      <br />
-    </div>
+      
+    </Col>
   );
 }
 
@@ -275,13 +342,13 @@ function ProductForm({
   const {publish, shop, cart, prevCart} = useAnalytics();
   return (
     <div className="product-form">
-      <VariantSelector
+      {/**<VariantSelector
         handle={product.handle}
         options={product.options}
         variants={variants}
       >
         {({option}) => <ProductOptions key={option.name} option={option} />}
-      </VariantSelector>
+      </VariantSelector>**/}
       <br />
       <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
@@ -306,7 +373,7 @@ function ProductForm({
             : []
         }
       >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        {selectedVariant?.availableForSale ? 'Añadir al carrito' : 'No disponible por el momento'}
       </AddToCartButton>
     </div>
   );
@@ -427,6 +494,42 @@ const PRODUCT_FRAGMENT = `#graphql
     }
     selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
       ...ProductVariant
+    }
+    metafields(
+      identifiers: [
+        { namespace: "custom", key: "liverpool_images" }
+        { namespace: "custom", key: "ficha_tecnica" }
+        { namespace: "custom", key: "short_description" }
+      ]
+    ) {
+      references(first: 10) {
+        nodes {
+          ... on MediaImage {
+            __typename
+            id
+            image {
+              altText
+              height
+              id
+              url
+              width
+            }
+          }
+        }
+      }
+      value
+      reference {
+        ... on GenericFile {
+          id
+          url
+        }
+      }
+      key
+      
+    }
+    handle
+    featuredImage {
+      url
     }
     variants(first: 1) {
       nodes {

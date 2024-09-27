@@ -28,7 +28,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.2.0",
-    "swiper": "^11.1.7"
+    "swiper": "^11.1.12"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",

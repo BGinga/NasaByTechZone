@@ -1,6 +1,7 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
 import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
+import rocket from '../assets/images/icono_backpacks.png';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -60,12 +61,13 @@ function FooterMenu({
         ) : (
           <NavLink
             end
+            className={'footer-navlink'}
             key={item.id}
             prefetch="intent"
             style={activeLinkStyle}
             to={url}
           >
-            {item.title}
+            <img src={rocket} alt="rocket" width={25} height='auto' />{item.title}
           </NavLink>
         );
       })}

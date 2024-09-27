@@ -107,7 +107,7 @@ export const Homepage = () => {
     };
   }, []);
   return (
-    <Container fluid>
+    <Container fluid className='isInHome'>
       <Row className="astronaut-row">
         <Col md="5" lg="5" sm="5" className='astronaut-container'>
           <img style={{top: `${topOffset}px`}} className="absolute astronaut" src={Astronaut} width={600} />
@@ -126,7 +126,7 @@ export const Homepage = () => {
         <Col md={12} className='description nasalization'>
             <span>{backpacks.collection?.description}</span>
         </Col>
-        <Col md={12} className='product-container'>
+        <Col style={{maxWidth: '115em'}} md={12} className='product-container'>
             <SlidesMakerCollection products={backpacks.collection?.products.edges} />
         </Col>
       </Row>
@@ -140,7 +140,7 @@ export const Homepage = () => {
         <Row className='description nasalization'>
             <span>{accesorios.collection?.description}</span>
         </Row>
-        <Row className='product-container'>
+        <Row style={{maxWidth: '115em'}} className='product-container'>
             <SlidesMakerCollection products={accesorios.collection?.products.edges} />
         </Row>
       </Row>
@@ -154,7 +154,7 @@ export const Homepage = () => {
         <Row className='description nasalization'>
             <span>{sillas.collection?.description}</span>
         </Row>
-        <Row className='product-container'>
+        <Row style={{maxWidth: '115em'}} className='product-container'>
             <SlidesMakerCollection products={sillas.collection?.products.edges} />
         </Row>
       </Row>

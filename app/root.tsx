@@ -14,7 +14,9 @@ import {
 import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
-import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import bootstrap from '../app/styles/bootstrap.min.css';
+
+
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 

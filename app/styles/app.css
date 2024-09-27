@@ -195,7 +195,7 @@ button.reset:hover:not(:has(> *)) {
 
 .header-menu-desktop {
   display: none;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   @media (min-width: 45em) {
     display: flex;
     grid-gap: 1rem;
@@ -205,6 +205,9 @@ button.reset:hover:not(:has(> *)) {
 
 .header-menu-item {
   cursor: pointer;
+  font-size: 1.2em;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .header-ctas {
@@ -219,17 +222,25 @@ button.reset:hover:not(:has(> *)) {
 * --------------------------------------------------
 */
 .footer {
-  background: var(--color-dark);
+  background: transparent;
   margin-top: auto;
 }
 
 .footer-menu {
   align-items: center;
   display: flex;
-  grid-gap: 1rem;
-  padding: 1rem;
+  justify-content: center;
+  grid-gap: 3rem;
+  padding: 3rem;
 }
 
+.footer-navlink{
+  font-size: 1.4em;
+  font-family: 'Nasalization';
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+}
 .footer-menu a {
   color: var(--color-light);
 }
@@ -508,13 +519,16 @@ button.reset:hover:not(:has(> *)) {
 }
 
 
-body:has(.not-home){
+body:has(:not(.isInHome)){
   background-image: url('/app/assets/images/bg_product.png');
-  background-size: 100%;
+  background-color: #000;
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  object-fit: cover;
   min-height: 200vh;
 }
 
-body:has(.home){
+body:has(.isInHome){
   background-image: url('/app/assets/images/bg_home.png');
   background-size: 100%;
   min-height: 200vh;
@@ -579,7 +593,7 @@ body:has(.home){
   padding-bottom: 1em;
 }
 
-.swiperHome .swiper-slide::after{
+/*.swiperHome .swiper-slide::after{
   content: '';
   z-index: 10;
   border-radius: 18%;
@@ -590,7 +604,7 @@ body:has(.home){
   position: absolute;
   top: 0;
   left: 4.5%;
-}
+}*/
 
 
 .carrousel-product img{
@@ -601,6 +615,7 @@ body:has(.home){
 .astronaut-container{
   position: relative;
   min-height: 400px;
+  z-index: -1;
 }
 
 .astronaut{
@@ -612,5 +627,84 @@ body:has(.home){
   top: 0;
 }
 
+.product-title{
+  color: white;
+  font-size: 2em;
+  font-family: 'Nasalization';
+  text-align: center;
+  border: 1px solid white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.4);
+  border-radius: 18px;
+  padding: 3px;
+}
 
+.description_html{
+  color: white;
+  font-family: 'Nasalization';
+  text-shadow: #000 1px 1px;
+  padding: 3.5em 2.5em;
+  background-color: rgba(255,255,255,0.4);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+}
 
+.description_html p:has(:not(p1)){
+  font-size: 1.5em;
+}
+.description_html p:has(p1){
+  font-size: 16px;
+}
+
+.description_html li{
+  font-size: 16px;
+}
+
+span.product-short-description {
+  color: white;
+  padding: 2.5em 0em;
+  font-size: 18px;
+  display: flex;
+  font-family: 'Nasalization';
+  text-align: center;
+}
+
+.product_ficha_tecnica a{
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-family: 'Nasalization';
+  font-size: 20px;
+  justify-content: center;
+  border: 1px solid white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.4);
+  border-radius: 13px;
+  padding: 7px 13px;
+  max-width: fit-content;
+}
+
+.product-price{
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-family: 'Nasalization';
+}
+
+.product-form{
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.product-form button{
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 15px 40px;
+  font-size: 18px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+
+}

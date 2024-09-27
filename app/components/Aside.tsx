@@ -33,7 +33,7 @@ export function Aside({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setWindow(window.location.pathname);
-      console.log(window.location.pathname)
+      console.log(window.location.pathname);
     }
   }, [])
   return (
