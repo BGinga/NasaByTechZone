@@ -67,7 +67,7 @@ export default function Blog() {
   return (
     <div className="blog">
       <h1>{blog.title}</h1>
-      <div className="blog-grid">
+      <div className="blog-grid" style={{maxWidth: '95em', margin: '0 auto'}}>
         <Pagination connection={articles}>
           {({nodes, isLoading, PreviousLink, NextLink}) => {
             return (

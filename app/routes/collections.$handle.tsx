@@ -79,16 +79,16 @@ export default function Collection() {
       <p className="collection-description">{collection.description}</p>
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
-          <>
+          <div className='container-load'>
             <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+              {isLoading ? 'Cargando...' : <span>↑ Cargar menos</span>}
             </PreviousLink>
             <ProductsGrid products={nodes} />
             <br />
-            <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+            <NextLink className='loading-button'>
+              {isLoading ? 'Cargando...' : <span>Cargar más ↓</span>}
             </NextLink>
-          </>
+          </div>
         )}
       </Pagination>
       <Analytics.CollectionView

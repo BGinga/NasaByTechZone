@@ -94,12 +94,10 @@ export function SearchForm({searchTerm}: {searchTerm: string}) {
       <input
         defaultValue={searchTerm}
         name="q"
-        placeholder="Search…"
+        placeholder="Buscar..."
         ref={inputRef}
         type="search"
-      />
-      &nbsp;
-      <button type="submit">Search</button>
+      /><button type="submit">Buscar</button>
     </Form>
   );
 }
@@ -160,7 +158,7 @@ function SearchResultsProductsGrid({
 }: Pick<SearchQuery, 'products'> & {searchTerm: string}) {
   return (
     <div className="search-result">
-      <h2>Products</h2>
+      <h2>Productos</h2>
       <Pagination connection={products}>
         {({nodes, isLoading, NextLink, PreviousLink}) => {
           const ItemsMarkup = nodes.map((product) => {
@@ -196,7 +194,7 @@ function SearchResultsProductsGrid({
             <div>
               <div>
                 <PreviousLink>
-                  {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+                  {isLoading ? 'Loading...' : <span>↑ Cargar Anterior </span>}
                 </PreviousLink>
               </div>
               <div>
@@ -205,7 +203,7 @@ function SearchResultsProductsGrid({
               </div>
               <div>
                 <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                  {isLoading ? 'Loading...' : <span>Cargar más ↓</span>}
                 </NextLink>
               </div>
             </div>
@@ -220,7 +218,7 @@ function SearchResultsProductsGrid({
 function SearchResultPageGrid({pages}: Pick<SearchQuery, 'pages'>) {
   return (
     <div className="search-result">
-      <h2>Pages</h2>
+      <h2>Páginas</h2>
       <div>
         {pages?.nodes?.map((page) => (
           <div className="search-results-item" key={page.id}>
@@ -238,7 +236,7 @@ function SearchResultPageGrid({pages}: Pick<SearchQuery, 'pages'>) {
 function SearchResultArticleGrid({articles}: Pick<SearchQuery, 'articles'>) {
   return (
     <div className="search-result">
-      <h2>Articles</h2>
+      <h2>Artículos</h2>
       <div>
         {articles?.nodes?.map((article) => (
           <div className="search-results-item" key={article.id}>
@@ -254,7 +252,7 @@ function SearchResultArticleGrid({articles}: Pick<SearchQuery, 'articles'>) {
 }
 
 export function NoSearchResults() {
-  return <p>No results, try a different search.</p>;
+  return <p>Sin resultados, intenta con otro término de búsqueda</p>;
 }
 
 type ChildrenRenderProps = {
@@ -358,7 +356,7 @@ export function PredictiveSearchResults() {
       {searchTerm.current && (
         <Link onClick={goToSearchResult} to={`/search?q=${searchTerm.current}`}>
           <p>
-            View all results for <q>{searchTerm.current}</q>
+            Ver todos los resultados de:  <q>{searchTerm.current}</q>
             &nbsp; →
           </p>
         </Link>
@@ -377,7 +375,7 @@ function NoPredictiveSearchResults({
   }
   return (
     <p>
-      No results found for <q>{searchTerm.current}</q>
+      Sin resultados para: <q>{searchTerm.current}</q>
     </p>
   );
 }
@@ -499,11 +497,11 @@ function pluralToSingularSearchType(
     | Array<NormalizedPredictiveSearchResults[number]['type']>,
 ) {
   const plural = {
-    articles: 'ARTICLE',
-    collections: 'COLLECTION',
-    pages: 'PAGE',
-    products: 'PRODUCT',
-    queries: 'QUERY',
+    articles: 'Artículos',
+    collections: 'Colección',
+    pages: 'Página',
+    products: 'Producto',
+    queries: 'Búsqueda',
   };
 
   if (typeof type === 'string') {

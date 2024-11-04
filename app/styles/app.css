@@ -8,6 +8,10 @@
   --color-light: #fff;
 }
 
+a, p , span , div {
+  color: white !important;
+}
+
 @font-face {
   font-family: 'Nasalization';
   src: url('/app/assets/fonts/NASALIZATION-RG.OTF') format('truetype');
@@ -277,7 +281,7 @@ button.reset:hover:not(:has(> *)) {
 }
 
 .cart-summary-aside {
-  background: white;
+  background: transparent;
   border-top: 1px solid var(--color-dark);
   bottom: 0;
   padding-top: 0.75rem;
@@ -297,7 +301,16 @@ button.reset:hover:not(:has(> *)) {
 
 .cart-subtotal {
   align-items: center;
+  justify-content: center;
   display: flex;
+}
+
+.cart-subtotal dd{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  margin-left: 0.35em;
 }
 /*
 * --------------------------------------------------
@@ -638,16 +651,58 @@ body:has(.isInHome){
   padding: 3px;
 }
 
-.description_html{
+.blog-container-product, .description_html{
   color: white;
   font-family: 'Nasalization';
   text-shadow: #000 1px 1px;
-  padding: 3.5em 2.5em;
-  background-color: rgba(255,255,255,0.4);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.4);
-  border-radius: 25px;
+  padding: 0;
+  
 }
 
+.blog-container-product{
+  display: flex;
+  margin: 0;
+  max-width: 75em;
+  padding: 0 !important;
+}
+
+.blog-container-product img{
+  border-radius: 8%;
+  transition: all 0.5s ease-in-out;
+}
+
+.blog-container-product a:hover  img{
+  transform: scale(1.067);
+}
+
+.blog-container-product a{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 2.5em;
+  flex-basis: auto;
+  color: white;
+  text-decoration: none;
+}
+
+.blog-container-product .blogText, .description_html , .article.container-art{
+  padding: 1em 2.5em;
+  background-color: rgba(255,255,255,0.25);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  height: 100%;
+}
+
+
+
+.blogText{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.description_html{
+  padding: 1.5em 2.5em;
+}
 .description_html p:has(:not(p1)){
   font-size: 1.5em;
 }
@@ -707,4 +762,232 @@ span.product-short-description {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.4);
   border-radius: 15px;
 
+}
+
+.bagIcon{
+  display: flex;
+  max-width: 40px;
+  color: white;
+  position: relative;
+}
+
+.countBagIcon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  color: black;
+  padding: 3px 10px;
+  font-size: 11px;
+  border-radius: 5em;
+  z-index: 10;
+}
+
+.search svg {
+  max-width: 30px;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  max-height: 70px;
+  background-color: transparent;
+  border: none;
+}
+
+aside{
+  background-color: #020202c2;
+  color: white;
+}
+
+.predictive-search-result ul li a{ 
+  display: flex;
+  color: white;
+  text-decoration: none;
+}
+
+.predictive-search-result-item a img{
+  background-color: white;
+}
+
+.predictive-search a{
+  color: white;
+  text-decoration: none;
+}
+
+div.search{
+  display: flex;
+  flex-direction: column;
+  padding-top: 5em;
+  row-gap: 1.5em;
+}
+
+.collection{
+  display: flex;
+  padding-top: 4em ;
+  flex-direction: column;
+}
+
+.collection h1{
+  color: white;
+  text-align: center;
+}
+
+.collection a{
+  color: white;
+  text-decoration: none;
+}
+
+.collection .products-grid{
+  max-width: 100em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-item img{
+  background-color: white;
+}
+
+.header{
+  background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.predictive-search-form div{
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+
+.predictive-search-form input{
+  color: white;
+  width: 100%;
+  background-color: #000;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+} 
+
+.predictive-search-form button{
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: black;
+  font-weight: 600;
+}
+
+.cart-details ul li a{
+  color: white
+}
+
+.cart-details ul li div:not(.cart-line-quantity){
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-line-quantity{
+  flex-direction: row;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.cart-line-quantity small{
+  width: 100%;
+}
+
+.cart-line-quantity form button{
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.discount-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.55em;
+  align-items: center;
+}
+
+.discount-container button{
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 53%;
+}
+
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+}
+
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.Swiper-Container{
+  padding-top: 20px;
+}
+
+.product-card-wrapper {
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 0, 0, 0.2) 25%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(255, 255, 255, 0.4) 75%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  background-size: 200% auto;
+  animation: borderGlow 4s linear infinite;
+  transition: all 0.3s ease;
+}
+
+.product-card-wrapper:hover {
+  transform: translateY(-15px);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+}
+
+.product-card {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+
+.container-load{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-button{
+  background-color: #fff;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+
+}
+
+.loading-button span{
+  color: black !important;
 }

@@ -74,6 +74,10 @@ async function loadCriticalData({
     // Add other queries here, so that they are loaded in parallel
   ]);
 
+  const Blog: any[] = await Promise.all([
+    storefront.query(BLOG_ALT)
+  ]);
+
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
@@ -98,6 +102,7 @@ async function loadCriticalData({
 
   return {
     product,
+    Blog
   };
 }
 
@@ -151,9 +156,11 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
+  const {Blog}: any = useLoaderData<typeof loader>()
   const {product, variants} = useLoaderData<typeof loader>();
   const {selectedVariant, descriptionHtml, metafields} = product;
-  console.log(selectedVariant);
+  const currentBlog = Blog[0].blog.articles.nodes[0];
+  console.log(currentBlog)
   return (
     <Container>
       <Row xs={1} md={2} className="main-product">
@@ -187,12 +194,12 @@ export default function Product() {
           <br />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          
-          <br />
-          <div className='description_html' dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-          <br />
+      <Row style={{justifyContent: 'center', marginTop: '5em'}}>
+        <Col className='blog-container-product'>
+          <a href={'/blogs/NasaByTechZone/' + currentBlog.handle} >
+              <div className='blogText' dangerouslySetInnerHTML={{__html: currentBlog.excerptHtml}} />
+              <div> <img src={currentBlog.image.url} width={350} height={'auto'} alt={currentBlog.title}/></div>
+          </a>
         </Col>
       </Row>
     </Container>
@@ -581,3 +588,22 @@ const VARIANTS_QUERY = `#graphql
     }
   }
 ` as const;
+
+
+const BLOG_ALT = `#graphql
+query Blog {
+  blog(handle: "NasaByTechZone") {
+    articles(sortKey: PUBLISHED_AT, first: 1) {
+      nodes {
+        handle
+        excerptHtml
+        contentHtml
+        image {
+          url
+        }
+        title
+      }
+    }
+  }
+}
+` as const

@@ -175,9 +175,9 @@ const SlidesMakerCollection = ({products}: any) => {
         const variantUrl = useVariantUrl(product.node.handle, variant.selectedOptions);
 
         return(
-          <SwiperSlide key={index + product.node.handle}>
+          <SwiperSlide className='Swiper-Container' key={index + product.node.handle}>
             <Link
-              className="carrousel-product"
+              className="carrousel-product "
               key={product.id}
               prefetch="intent"
               to={variantUrl}
@@ -186,7 +186,7 @@ const SlidesMakerCollection = ({products}: any) => {
                 <Image
                   alt={product.node.featuredImage.altText || product.node.title}
                   data={product.node.featuredImage}
-                  className='product-carousel-image '
+                  className='product-carousel-image product-card-wrapper '
                   aspectRatio="1/1"
                   width={300}
                   height={300}

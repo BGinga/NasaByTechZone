@@ -116,15 +116,6 @@ function CartLineItem({
           </p>
         </Link>
         <CartLinePrice line={line} as="span" />
-        <ul>
-          {selectedOptions.map((option) => (
-            <li key={option.name}>
-              <small>
-                {option.name}: {option.value}
-              </small>
-            </li>
-          ))}
-        </ul>
         <CartLineQuantity line={line} />
       </div>
     </li>
@@ -137,7 +128,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   return (
     <div>
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <p>Continuar con el pago &rarr;</p>
       </a>
       <br />
     </div>
@@ -158,9 +149,9 @@ export function CartSummary({
 
   return (
     <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
+      <h4>Resumen</h4>
       <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+        <dt>Subtotal:</dt>
         <dd>
           {cost?.subtotalAmount?.amount ? (
             <Money data={cost?.subtotalAmount} />
@@ -188,7 +179,7 @@ function CartLineRemoveButton({
       inputs={{lineIds}}
     >
       <button disabled={disabled} type="submit">
-        Remove
+        Eliminar
       </button>
     </CartForm>
   );
@@ -269,8 +260,7 @@ export function CartEmpty({
     <div hidden={hidden}>
       <br />
       <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
+        Parece que no has añadido nada a tu carrito, sigue buscando un producto y añádelo para comprarlo
       </p>
       <br />
       <Link
@@ -281,7 +271,7 @@ export function CartEmpty({
           }
         }}
       >
-        Continue shopping →
+        Continuar comprando →
       </Link>
     </div>
   );
@@ -302,12 +292,12 @@ function CartDiscounts({
       {/* Have existing discount, display it with a remove option */}
       <dl hidden={!codes.length}>
         <div>
-          <dt>Discount(s)</dt>
+          <dt>Cupon(es)</dt>
           <UpdateDiscountForm>
             <div className="cart-discount">
               <code>{codes?.join(', ')}</code>
               &nbsp;
-              <button>Remove</button>
+              <button>Eliminar</button>
             </div>
           </UpdateDiscountForm>
         </div>
@@ -315,10 +305,9 @@ function CartDiscounts({
 
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
-        <div>
-          <input type="text" name="discountCode" placeholder="Discount code" />
-          &nbsp;
-          <button type="submit">Apply</button>
+        <div className='discount-container'>
+          <input type="text" name="discountCode" placeholder="Cupón" />
+          <button type="submit">Aplicar</button>
         </div>
       </UpdateDiscountForm>
     </div>

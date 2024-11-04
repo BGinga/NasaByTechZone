@@ -63,11 +63,11 @@ export default function Article() {
   }).format(new Date(article.publishedAt));
 
   return (
-    <div className="article">
+    <div className="article container-art" style={{maxWidth: '90em' , margin: '0 auto', marginTop: '1.5em', textAlign: 'center'}}>
       <h1>
         {title}
         <div>
-          {publishedDate} &middot; {author?.name}
+          {publishedDate}
         </div>
       </h1>
 
@@ -75,6 +75,7 @@ export default function Article() {
       <div
         dangerouslySetInnerHTML={{__html: contentHtml}}
         className="article"
+        style={{marginTop: '2em'}}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import {type CartViewPayload, useAnalytics} from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import Logo from '../assets/images/NASA_Logo-b-min.webp';
+import { EmptyBag, FullBag, SearchIcon } from './Icons';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -125,8 +126,8 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
-    <button className="reset" onClick={() => open('search')}>
-      Search
+    <button className="search" onClick={() => open('search')}>
+      Buscar <SearchIcon />
     </button>
   );
 }
@@ -149,7 +150,12 @@ function CartBadge({count}: {count: number}) {
         } as CartViewPayload);
       }}
     >
-      Cart {count}
+      {count == 0 && (
+        <EmptyBag />
+      )} 
+      {count > 0 && (
+        <FullBag count={count} />
+      )} 
     </a>
   );
 }
