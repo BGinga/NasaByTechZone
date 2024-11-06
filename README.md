@@ -1,45 +1,30 @@
-# Hydrogen template: Skeleton
+# Project NASA By TechZone
+“NASA by TechZone” is a sub-brand of TechZone, a company renowned for delivering innovative, high-quality, and accessible tech products. This sub-brand emerges from the inspiration and collaboration with the National Aeronautics and Space Administration (NASA), focusing on products that capture the essence of exploration, science, and technology, iconic to the U.S. space agency.
 
-Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dovetail with [Remix](https://remix.run/), Shopify’s full stack web framework. This template contains a **minimal setup** of components, queries and tooling to get started with Hydrogen.
+NASA by TechZone line combines style and functionality in a range of products tailored for tech enthusiasts, space lovers, and NASA fans. From backpacks and accessories to gadgets and desk items, each product stands out for its unique design, incorporating NASA’s branding and colors, along with high-quality materials that ensure durability and style with every use.
 
-[Check out Hydrogen docs](https://shopify.dev/custom-storefronts/hydrogen)
-[Get familiar with Remix](https://remix.run/docs/en/v1)
+## V0.0.1 - Init Project ( Alpha )
+- Init project build
+- Minor changes
+- React init build 
+- Skeleton and first design
+- Store connect 
 
-## What's included
+## V0.0.12 - Advanced Structure ( Alpha )
+- Minor problems Solved
+- Principal assets corrected
+- Collections modified
+- Queries solved
+- Search aside and cart aside modified 
 
-- Remix
-- Hydrogen
-- Oxygen
-- Vite
-- Shopify CLI
-- ESLint
-- Prettier
-- GraphQL generator
-- TypeScript and JavaScript flavors
-- Minimal setup of components and routes
+## V0.0.13 - Styles ( Alpha )
+- CSS styles files corrected
+- Brand Colors and flexbox added
+- Animations added
+- Font Family added
 
-## Getting started
-
-**Requirements:**
-
-- Node.js version 18.0.0 or higher
-
-```bash
-npm create @shopify/hydrogen@latest
-```
-
-## Building for production
-
-```bash
-npm run build
-```
-
-## Local development
-
-```bash
-npm run dev
-```
-
-## Setup for using Customer Account API (`/account` section)
-
-Follow step 1 and 2 of <https://shopify.dev/docs/custom-storefronts/building-with-the-customer-account-api/hydrogen#step-1-set-up-a-public-domain-for-local-development>
+## V0.0.15 - Pre Production Build ( Alpha )
+- Products error by metafields null solved
+- Styles issues solved
+- Header and products issues solved
+- Minor security issues solved
