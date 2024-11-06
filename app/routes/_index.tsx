@@ -113,7 +113,7 @@ export const Homepage = () => {
           <img style={{top: `${topOffset}px`}} className="absolute astronaut" src={Astronaut} width={600} />
         </Col>
         <Col md="7" lg="7" sm="7">
-          <span className="home-phrase nasalization">¡ASOMBRATE COMO NUNCA!</span>
+          <span className="home-phrase nasalization">¡ASÓMBRATE COMO NUNCA!</span>
         </Col>
       </Row>
       <Row className=''>

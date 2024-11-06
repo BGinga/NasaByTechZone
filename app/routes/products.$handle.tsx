@@ -160,11 +160,16 @@ export default function Product() {
   const {product, variants} = useLoaderData<typeof loader>();
   const {selectedVariant, descriptionHtml, metafields} = product;
   const currentBlog = Blog[0].blog.articles.nodes[0];
-  console.log(currentBlog)
+  console.log(product, variants)
   return (
     <Container>
       <Row xs={1} md={2} className="main-product">
-        <ProductImages images={metafields[0]?.references?.nodes} />
+        { metafields[0]?.references?.nodes == undefined ? (
+          <ProductImages isUnique={true} images={product.variants.nodes[0].image} />
+        ) : 
+        (
+          <ProductImages isUnique={false} images={metafields[0]?.references?.nodes} />
+        )}
         <ProductMain
           selectedVariant={selectedVariant}
           product={product}
@@ -207,8 +212,7 @@ export default function Product() {
   );
 }
 
-function ProductImages({images}: any) {
-  console.log(images)
+function ProductImages({images, isUnique}: {images: any, isUnique: boolean}) {
   if (!images) {
     return <div className="product-image" />;
   }
@@ -222,18 +226,27 @@ function ProductImages({images}: any) {
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
         >
-          {images.map((image: any, index: number)=> {
-            return <SwiperSlide key={index + "product-image" }>
+          {isUnique ? (
+            <SwiperSlide>
               <Image
-                alt={image.altText || 'Product Image'}
+                alt={images.altText || 'Product Image'}
                 aspectRatio="2/3"
-                data={image.image}
-                key={image.id}
+                data={images}
                 sizes="(min-width: 45em) 50vw, 100vw"
               />
             </SwiperSlide>
-          })}
-         
+          ) : (
+            images.map((image: any, index: number) => (
+              <SwiperSlide key={index + "product-image"}>
+                <Image
+                  alt={image.altText || 'Product Image'}
+                  aspectRatio="2/3"
+                  data={image.image}
+                  sizes="(min-width: 45em) 50vw, 100vw"
+                />
+              </SwiperSlide>
+            ))
+          )}
           
         </Swiper>
       </div>
@@ -268,9 +281,11 @@ function ProductMain({
       <Row md={2} xs={1}>
         <Col>
             <div className='product_ficha_tecnica'>
-              <a href={ficha_tecnica.reference.url} title='Ficha Técnica'>
-                <img src={rocket} alt="rocket" width={25} height='auto' /> Ficha Técnica
-              </a>
+              {ficha_tecnica && (
+                <a href={ficha_tecnica.reference.url} title='Ficha Técnica'>
+                  <img src={rocket} alt="rocket" width={25} height='auto' /> Ficha Técnica
+                </a>
+              )}
             </div>
         </Col>
         <Col>
