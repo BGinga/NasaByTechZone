@@ -38,7 +38,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { Navigation } from 'swiper/modules';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
+  return [{title: `NasaByTechZone | ${data?.product.title ?? ''}`}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {

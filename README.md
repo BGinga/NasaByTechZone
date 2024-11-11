@@ -3,27 +3,26 @@
 
 NASA by TechZone line combines style and functionality in a range of products tailored for tech enthusiasts, space lovers, and NASA fans. From backpacks and accessories to gadgets and desk items, each product stands out for its unique design, incorporating NASA’s branding and colors, along with high-quality materials that ensure durability and style with every use.
 
-## V0.0.1 - Init Project ( Alpha )
+## V1.0.0 - BETA ( Launch )
+- Ico added 
+- SEO name pages changed
+- Launch Configuration
+
+## V0.0.1 - V0.015 - ALPHA
 - Init project build
 - Minor changes
 - React init build 
 - Skeleton and first design
 - Store connect 
-
-## V0.0.12 - Advanced Structure ( Alpha )
 - Minor problems Solved
 - Principal assets corrected
 - Collections modified
 - Queries solved
 - Search aside and cart aside modified 
-
-## V0.0.13 - Styles ( Alpha )
 - CSS styles files corrected
 - Brand Colors and flexbox added
 - Animations added
 - Font Family added
-
-## V0.0.15 - Pre Production Build ( Alpha )
 - Products error by metafields null solved
 - Styles issues solved
 - Header and products issues solved
