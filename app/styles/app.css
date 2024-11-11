@@ -312,6 +312,20 @@ button.reset:hover:not(:has(> *)) {
   margin-bottom: 0;
   margin-left: 0.35em;
 }
+
+/*
+* --------------------------------------------------
+* components/Page
+* --------------------------------------------------
+*/
+.page{
+  max-width: calc(100vw - 10%);
+  margin: 1em auto;
+  background-color: #ffffff30;
+  border: 1px solid whitesmoke;
+  border-radius: 1em;
+  padding: 4em;
+}
 /*
 * --------------------------------------------------
 * components/Search
@@ -425,6 +439,8 @@ button.reset:hover:not(:has(> *)) {
 */
 .collection-description {
   margin-bottom: 1rem;
+  margin: 10px auto 25px auto;
+  text-align: center;
   max-width: 95%;
   @media (min-width: 45em) {
     max-width: 600px;
@@ -495,11 +511,29 @@ button.reset:hover:not(:has(> *)) {
 * routes/blog._index.tsx
 * --------------------------------------------------
 */
+
+.blog{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .blog-grid {
+  max-width: calc(100vw - 10%);
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
   margin-bottom: 2rem;
+}
+
+.blog-article a{
+  text-decoration: none;
+}
+
+.blog-article {
+  background-color: #ffffff89;
+  padding: 1em;
+  border-radius: calc(10px + 0.5em);
 }
 
 .blog-article-image {
@@ -509,6 +543,7 @@ button.reset:hover:not(:has(> *)) {
 
 .blog-article-image img {
   height: 100%;
+  border-radius: 7px;
 }
 
 /*
@@ -831,7 +866,7 @@ div.search{
 
 .collection{
   display: flex;
-  padding-top: 4em ;
+  padding-top: 4em;
   flex-direction: column;
 }
 
@@ -846,7 +881,7 @@ div.search{
 }
 
 .collection .products-grid{
-  max-width: 100em;
+  max-width: calc(100vw - 10%);
   margin-left: auto;
   margin-right: auto;
 }
@@ -996,3 +1031,26 @@ background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%);
 .loading-button span{
   color: black !important;
 }
+
+/*
+* --------------------------------------------------
+* Swiper Navigation 
+* --------------------------------------------------
+*/
+
+@font-face {
+  font-family: 'SwiperIcons';
+  src: url('../assets/fonts/swiper-icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after{
+  font-family: 'SwiperIcons' !important; 
+  background-color: #00000090;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  padding: 5px 12px;
+  font-size: 30px !important;
+}
+

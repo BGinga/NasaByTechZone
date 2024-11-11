@@ -85,13 +85,19 @@ export const Homepage = () => {
   const {sillas} = data;
   const [isAbsolute, setIsAbsolute] = useState(false);
   const [topOffset, setTopOffset] = useState(0);
+  const [maxHeight,setMaxHeight] = useState(1700);
 
   const handleScroll = () => {
+    const masterContainer = document.querySelector('.isInHome');
+
+    if(masterContainer!!.getBoundingClientRect().height > 1930){
+      setMaxHeight(masterContainer!!.getBoundingClientRect().height);
+    }
+    
     const container = document.querySelector('.astronaut-container');
     const containerRect = container!!.getBoundingClientRect();
-   
     
-    if (containerRect.top <= 0) {
+    if (containerRect.top <= 0 && scrollY < maxHeight) {
       setIsAbsolute(true);
       setTopOffset(scrollY);
     } else {
@@ -106,6 +112,7 @@ export const Homepage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <Container fluid className='isInHome'>
       <Row className="astronaut-row">

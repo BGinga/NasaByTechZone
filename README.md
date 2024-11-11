@@ -3,6 +3,12 @@
 
 NASA by TechZone line combines style and functionality in a range of products tailored for tech enthusiasts, space lovers, and NASA fans. From backpacks and accessories to gadgets and desk items, each product stands out for its unique design, incorporating NASA’s branding and colors, along with high-quality materials that ensure durability and style with every use.
 
+## V1.0.1 - BETA
+- Scroll size solved
+- Meta descriptions corrected
+- Swiper navigators solved
+- Bugs fixed 
+
 ## V1.0.0 - BETA ( Launch )
 - Ico added 
 - SEO name pages changed

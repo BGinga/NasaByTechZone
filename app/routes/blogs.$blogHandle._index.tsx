@@ -4,7 +4,7 @@ import {Image, Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import type {ArticleItemFragment} from 'storefrontapi.generated';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `NasaByTechZone | ${data?.blog.title ?? ''} blog`}];
+  return [{title: `NasaByTechZone | Blog`}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -66,14 +66,14 @@ export default function Blog() {
 
   return (
     <div className="blog">
-      <h1>{blog.title}</h1>
-      <div className="blog-grid" style={{maxWidth: '95em', margin: '0 auto'}}>
+      <h1>NASA BLOG</h1>
+      <div className="blog-grid">
         <Pagination connection={articles}>
           {({nodes, isLoading, PreviousLink, NextLink}) => {
             return (
               <>
                 <PreviousLink>
-                  {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+                  {isLoading ? 'Loading...' : <span>↑ Cargar menos</span>}
                 </PreviousLink>
                 {nodes.map((article, index) => {
                   return (
@@ -85,7 +85,7 @@ export default function Blog() {
                   );
                 })}
                 <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                  {isLoading ? 'Loading...' : <span>Cargar Más ↓</span>}
                 </NextLink>
               </>
             );

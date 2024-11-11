@@ -2,6 +2,7 @@ import {Suspense} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import rocket from '../assets/images/icono_backpacks.png';
 // Import Swiper styles
 
