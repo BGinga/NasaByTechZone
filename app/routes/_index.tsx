@@ -180,7 +180,6 @@ const SlidesMakerCollection = ({products}: any) => {
       {products.map( (product: any, index: number) => {
         const variant = product.node.variants.nodes[0];
         const variantUrl = useVariantUrl(product.node.handle, variant.selectedOptions);
-
         return(
           <SwiperSlide className='Swiper-Container' key={index + product.node.handle}>
             <Link
@@ -189,7 +188,18 @@ const SlidesMakerCollection = ({products}: any) => {
               prefetch="intent"
               to={variantUrl}
             >
-              {product.node.featuredImage && (
+              {product.node.metafield && (
+                <Image
+                  alt={product.node.metafield.references.nodes[0].altText || product.node.title}
+                  data={product.node.metafield.references.nodes[0].image}
+                  className='product-carousel-image product-card-wrapper '
+                  aspectRatio="1/1"
+                  width={300}
+                  height={300}
+                  sizes="(min-width: 56em) 400px, 100vw"
+                />
+              )}
+              {product.node.metafield == null &&(
                 <Image
                   alt={product.node.featuredImage.altText || product.node.title}
                   data={product.node.featuredImage}
@@ -239,6 +249,25 @@ query getCollectionByHandle($handle: String = "") {
               selectedOptions {
                 name
                 value
+              }
+            }
+          }
+          metafield(key: "auxiliares", namespace: "custom") {
+            id
+            namespace
+            key
+            references(first: 10) {
+              nodes {
+                ... on MediaImage {
+                  id
+                  image {
+                    url
+                    height
+                    altText
+                    width
+                  }
+                  alt
+                }
               }
             }
           }

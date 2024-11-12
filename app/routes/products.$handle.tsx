@@ -267,7 +267,6 @@ function ProductMain({
   const {title, metafields} = product;
   const short_description: any = metafields[2];
   const ficha_tecnica: any = metafields[1];
-  console.log(ficha_tecnica)
   
   return (
     <Col className="product-main">
@@ -278,12 +277,15 @@ function ProductMain({
           <Col>  
               <span className='product-short-description'>{short_description?.value}</span>
           </Col>
+          <Col>  
+              <span className='product-short-description' style={{justifyContent: 'center', padding: '1.5em 0em'}}> SKU: {product.variants.nodes[0].sku!!}</span>
+          </Col>
       </Row>
       <Row md={2} xs={1}>
         <Col>
             <div className='product_ficha_tecnica'>
               {ficha_tecnica && (
-                <a href={ficha_tecnica.reference.url} title='Ficha Técnica'>
+                <a href={ficha_tecnica.reference.url} title='Ficha Técnica' target='_blank'>
                   <img src={rocket} alt="rocket" width={25} height='auto' /> Ficha Técnica
                 </a>
               )}
@@ -523,6 +525,7 @@ const PRODUCT_FRAGMENT = `#graphql
         { namespace: "custom", key: "liverpool_images" }
         { namespace: "custom", key: "ficha_tecnica" }
         { namespace: "custom", key: "short_description" }
+        { namespace: "custom" , key: "auxiliares"}
       ]
     ) {
       references(first: 10) {

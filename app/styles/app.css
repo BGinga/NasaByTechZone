@@ -1054,3 +1054,9 @@ background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%);
   font-size: 30px !important;
 }
 
+
+
+.overlay.expanded{
+  z-index: 1001;
+}
+
