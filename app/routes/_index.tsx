@@ -2,8 +2,6 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
 import {Suspense, useEffect, useState} from 'react';
 import {
-  Pagination,
-  getPaginationVariables,
   Image,
   Money,
   Analytics,
@@ -16,6 +14,9 @@ import IconoSillas from '../assets/images/icono_sillas.png';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import { useVariantUrl } from '~/lib/variants';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export const meta: MetaFunction = () => {
   return [{title: 'NasaByTechZone | Inicio'}];
@@ -134,7 +135,7 @@ export const Homepage = () => {
             <span>{backpacks.collection?.description}</span>
         </Col>
         <Col style={{maxWidth: '115em'}} md={12} className='product-container'>
-            <SlidesMakerCollection products={backpacks.collection?.products.edges} />
+            <SlidesMakerCollection item={'backpacks'} products={backpacks.collection?.products.edges} />
         </Col>
       </Row>
       <Row>
@@ -148,7 +149,7 @@ export const Homepage = () => {
             <span>{accesorios.collection?.description}</span>
         </Row>
         <Row style={{maxWidth: '115em'}} className='product-container'>
-            <SlidesMakerCollection products={accesorios.collection?.products.edges} />
+            <SlidesMakerCollection item={'accesorios'} products={accesorios.collection?.products.edges} />
         </Row>
       </Row>
       <Row>
@@ -162,26 +163,29 @@ export const Homepage = () => {
             <span>{sillas.collection?.description}</span>
         </Row>
         <Row style={{maxWidth: '115em'}} className='product-container'>
-            <SlidesMakerCollection products={sillas.collection?.products.edges} />
+            <SlidesMakerCollection item={'sillas'} products={sillas.collection?.products.edges} />
         </Row>
       </Row>
     </Container>
   );
 };
 
-const SlidesMakerCollection = ({products}: any) => {
+const SlidesMakerCollection = ({item, products}: {item: string, products: any}) => {
 
   return(
       <Swiper
         spaceBetween={0}
         slidesPerView={4}
-        className='swiperHome'
+        className={item + ' swiperHome'}
+        navigation={true}
+        pagination={true}
+        modules={[Navigation, Pagination]}
       >
       {products.map( (product: any, index: number) => {
         const variant = product.node.variants.nodes[0];
         const variantUrl = useVariantUrl(product.node.handle, variant.selectedOptions);
         return(
-          <SwiperSlide className='Swiper-Container' key={index + product.node.handle}>
+          <SwiperSlide className='Swiper-Container' key={index + product.node.handle} >
             <Link
               className="carrousel-product "
               key={product.id}

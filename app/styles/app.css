@@ -1059,4 +1059,19 @@ background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%);
 .overlay.expanded{
   z-index: 1001;
 }
+.swiperHome{
+  padding: 25px 0px !important;
+}
+.swiperHome .swiper-button-next , .swiperHome .swiper-button-prev {
+  z-index: 100002;
+}
+
+.swiper-pagination-bullet{
+  border: 3px solid #fff;
+  height: 15px !important;
+  width: 15px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+}
 
