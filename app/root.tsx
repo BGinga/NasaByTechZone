@@ -15,7 +15,7 @@ import favicon from '~/assets/images/ico-nasa.webp';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import bootstrap from '../app/styles/bootstrap.min.css';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 
 import {PageLayout} from '~/components/PageLayout';
@@ -149,8 +149,8 @@ function Layout({children}: {children?: React.ReactNode}) {
   
 
   useEffect(() => {
-    ReactGA.initialize('G-SL0BV44YHD');
-    ReactGA.pageview(window!!.location.pathname);
+    ReactGA.initialize("G-SL0BV44YHD");
+    ReactGA.send('pageview');
   },[])
 
   return (

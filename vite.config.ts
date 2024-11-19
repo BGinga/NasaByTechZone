@@ -36,6 +36,7 @@ export default defineConfig({
        * @see https://vitejs.dev/config/dep-optimization-options
        */
       include: [
+        'react-ga4',
         'bootstrap/dist/js/bootstrap.bundle.min',
         'prop-types-extra/lib/all',
         'warning',
