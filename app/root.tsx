@@ -15,10 +15,12 @@ import favicon from '~/assets/images/ico-nasa.webp';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import bootstrap from '../app/styles/bootstrap.min.css';
+import ReactGA from 'react-ga';
 
 
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
+import { useEffect } from 'react';
 
 export type RootLoader = typeof loader;
 
@@ -143,12 +145,19 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
+  
+  
+
+  useEffect(() => {
+    ReactGA.initialize('G-SL0BV44YHD');
+    ReactGA.pageview(window!!.location.pathname);
+  },[])
 
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />s
         <Meta />
         <Links />
       </head>
