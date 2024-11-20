@@ -26,6 +26,9 @@ type PredicticeSearchResultItemImage =
 type PredictiveSearchResultItemPrice =
   | PredictiveProductFragment['variants']['nodes'][0]['price'];
 
+type PredictiveSearchResultsItemSKU = 
+  | PredictiveProductFragment['variants']['nodes'][0]['sku'];
+
 export type NormalizedPredictiveSearchResultItem = {
   __typename: string | undefined;
   handle: string;
@@ -35,6 +38,7 @@ export type NormalizedPredictiveSearchResultItem = {
   styledTitle?: string;
   title: string;
   url: string;
+  sku?: PredictiveSearchResultsItemSKU;
 };
 
 export type NormalizedPredictiveSearchResults = Array<
@@ -182,6 +186,7 @@ function SearchResultsProductsGrid({
                   )}
                   <div>
                     <p>{product.title}</p>
+                    <span style={{color: '#e4bb6e', paddingRight: '5px', fontWeight: 'bold'}}>{product.variants.nodes[0].sku}</span>
                     <small>
                       <Money data={product.variants.nodes[0].price} />
                     </small>
@@ -285,13 +290,12 @@ export function PredictiveSearchForm({
 
   function fetchResults(event: React.ChangeEvent<HTMLInputElement>) {
     const searchAction = action ?? '/api/predictive-search';
-    const newSearchTerm = event.target.value || '';
     const localizedAction = params.locale
       ? `/${params.locale}${searchAction}`
       : searchAction;
-
+    const newSearchTerm = event.target.value || '';
     fetcher.submit(
-      {q: newSearchTerm, limit: '6'},
+      {q: newSearchTerm, limit: '8'},
       {method: 'GET', action: localizedAction},
     );
   }
@@ -440,7 +444,10 @@ function SearchResultItem({goToSearchResult, item}: SearchResultItemProps) {
               }}
             />
           ) : (
-            <span>{item.title}</span>
+            <>
+              <span style={{color: '#e4bb6e', paddingRight: '5px', fontWeight: 'bold'}}>{item.sku}</span>
+              <span>{item.title}</span>
+            </>
           )}
           {item?.price && (
             <small>

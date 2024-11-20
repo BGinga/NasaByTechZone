@@ -43,9 +43,31 @@ export async function loader({request, params, context}: LoaderFunctionArgs) {
     context,
   });
 
-  return json(search, {
+  return Response.json(search, {
     headers: {'Cache-Control': `max-age=${search.searchTerm ? 60 : 3600}`},
   });
+}
+
+export async function action({request, params, context}: LoaderFunctionArgs) {
+  
+  if (request.method !== 'POST') {
+    throw new Error('Invalid request method');
+  }
+
+  console.log("Request: ");
+  console.log(request);
+  console.log("Params:");
+  console.log(params);
+  console.log("Context:");
+  console.log(context);
+
+  const search = await fetchPredictiveSearchResults({
+    params,
+    request,
+    context,
+  });
+
+  return Response.json(search);
 }
 
 async function fetchPredictiveSearchResults({
@@ -275,6 +297,7 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
           amount
           currencyCode
         }
+        sku
       }
     }
   }
@@ -297,6 +320,7 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
       limitScope: $limitScope,
       query: $searchTerm,
       types: $types,
+      searchableFields: VARIANTS_SKU
     ) {
       articles {
         ...PredictiveArticle

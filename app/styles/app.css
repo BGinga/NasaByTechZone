@@ -1075,3 +1075,78 @@ background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%);
   background-color: white !important;
 }
 
+
+
+/*
+* --------------------------------------------------
+* routes/contacto.tsx
+* --------------------------------------------------
+*/
+
+.contacto-page{
+  display: flex;
+  justify-content: center;
+  max-height: 90vw;
+}
+
+.container-form{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff89;
+  padding: 2.3em;
+  width: 55vw;
+  border-radius: calc(10px + 0.5em);
+}
+.container-form form{
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+}
+.container-form h1{
+  text-align: center;
+  width: 100%;
+}
+
+.container-form .form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  width: 100%;
+  padding: 0.2em 0em;
+}
+
+.container-form .form-group:has(.input-button-submit){
+  justify-content: center;
+  align-items: center;
+}
+
+.container-form .form-label{
+  font-size: 1.2em;
+  display: flex;
+}
+.container-form .form-input{
+  border: 1px solid #00000080;
+  display: flex;
+  padding: 0.7em;
+  max-width: 100%;
+  margin: 0 !important;
+  border-radius: calc(5px + 0.3em);
+}
+
+.input-button-submit{
+  display: flex;
+  background-color: #000;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  justify-content: center;
+  width: calc(100% - 30vw);
+}
+
+@media screen and (max-width: 768px) {
+  .container-form{
+    width: 80vw;
+  }
+}
+

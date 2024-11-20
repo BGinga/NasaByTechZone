@@ -316,7 +316,7 @@ export type PredictiveProductFragment = {__typename: 'Product'} & Pick<
 > & {
     variants: {
       nodes: Array<
-        Pick<StorefrontAPI.ProductVariant, 'id'> & {
+        Pick<StorefrontAPI.ProductVariant, 'id' | 'sku'> & {
           image?: StorefrontAPI.Maybe<
             Pick<StorefrontAPI.Image, 'url' | 'altText' | 'width' | 'height'>
           >;
@@ -537,6 +537,7 @@ export type ProductItemFragment = Pick<
         Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
       >;
     }>;
+    edges: Array<{node: Pick<StorefrontAPI.ProductVariant, 'sku'>}>;
   };
 };
 
@@ -1106,6 +1107,7 @@ export type SearchQuery = {
                   Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
                 >;
                 product: Pick<StorefrontAPI.Product, 'handle' | 'title'>;
+                sku: Pidck<StorefrontAPI.Product, 'sku'>;
               }
             >;
           };
