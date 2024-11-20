@@ -7,10 +7,10 @@ import {
   Analytics,
 } from '@shopify/hydrogen';
 import {Col, Container, Row } from 'react-bootstrap';
-import Astronaut from '../assets/images/astronauta.png';
-import IconoAccesorios from '../assets/images/icono_accesorios.png';
-import IconoBackpacks from '../assets/images/icono_backpacks.png';
-import IconoSillas from '../assets/images/icono_sillas.png';
+import Astronaut from '../assets/images/astronauta_optimized_.webp';
+import IconoAccesorios from '../assets/images/icono_accesorios_optimized_.webp';
+import IconoBackpacks from '../assets/images/icono_backpacks_optimized_.webp';
+import IconoSillas from '../assets/images/icono_sillas_optimized_.webp';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import { useVariantUrl } from '~/lib/variants';
@@ -118,7 +118,7 @@ export const Homepage = () => {
     <Container fluid className='isInHome'>
       <Row className="astronaut-row">
         <Col md="5" lg="5" sm="5" className='astronaut-container'>
-          <img style={{top: `${topOffset}px`}} className="absolute astronaut" src={Astronaut} width={600} />
+          <img style={{top: `${topOffset}px`}} alt='astronauta' className="absolute astronaut" src={Astronaut} width={600} />
         </Col>
         <Col md="7" lg="7" sm="7">
           <span className="home-phrase nasalization">¡ASÓMBRATE COMO NUNCA!</span>
@@ -127,7 +127,7 @@ export const Homepage = () => {
       <Row className=''>
         <Col md={12} className="title-container">
           <span>
-            <img src={IconoBackpacks} width={100} height={'auto'} />
+            <img src={IconoBackpacks} width={100} height={'auto'} alt='backpacks' />
           </span>
           <h1 className="title NASA">BACKPACKS</h1>
         </Col>
@@ -141,7 +141,7 @@ export const Homepage = () => {
       <Row>
         <div className="title-container rev">
           <span>
-            <img src={IconoAccesorios} width={100} height={'auto'} />
+            <img src={IconoAccesorios} width={100} height={'auto'}  alt='accesorios'/>
           </span>
           <h1 className="title NASA">Accesorios</h1>
         </div>
@@ -155,7 +155,7 @@ export const Homepage = () => {
       <Row>
         <div className="title-container">
           <span>
-            <img src={IconoSillas} width={100} height={'auto'} />
+            <img src={IconoSillas} width={100} height={'auto'} alt='sillas'/>
           </span>
           <h1 className="title NASA">Sillas</h1>
         </div>
@@ -188,6 +188,7 @@ const SlidesMakerCollection = ({item, products}: {item: string, products: any}) 
           <SwiperSlide className='Swiper-Container' key={index + product.node.handle} >
             <Link
               className="carrousel-product "
+              title={product.title}
               key={product.id}
               prefetch="intent"
               to={variantUrl}

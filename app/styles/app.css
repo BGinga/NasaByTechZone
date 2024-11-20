@@ -577,7 +577,7 @@ body:has(:not(.isInHome)){
 }
 
 body:has(.isInHome){
-  background-image: url('/app/assets/images/bg_home.png');
+  background-image: url('/app/assets/images/bg_final_home.png');
   background-size: 100%;
   min-height: 200vh;
 }
